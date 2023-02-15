@@ -41,7 +41,7 @@
 cp config.yaml.example config.yaml
 # 在当前目录创建并修改config.yaml
 # 在Linux或WindowsPowerShell上运行如下命令
-docker run -d --name dd-chatgpt -v $(pwd)/config.yaml:/app/config.yaml tanner/dd-chatgpt:latest
+docker run -d --name dd-chatgpt -v $(pwd)/config.yaml:/app/config.yaml cjz9032/dd-chatgpt:latest
 
 ```
 
@@ -50,9 +50,9 @@ docker run -d --name dd-chatgpt -v $(pwd)/config.yaml:/app/config.yaml tanner/dd
 ```sh
 # 在当前目录创建并修改config.yaml
 # 在WindowsPowerShell中运行如下命令
-docker run -d --name dd-chatgpt -v $(pwd)/config.yaml:/app/config.yaml tanner/dd-chatgpt:latest
+docker run -d --name dd-chatgpt -v $(pwd)/config.yaml:/app/config.yaml cjz9032/dd-chatgpt:latest
 # 在Windows command line (cmd)中, 您需要像这样修改上述代码的挂载目录:
-docker run -d --name dd-chatgpt -v %cd%/config.yaml:/app/config.yaml tanner/dd-chatgpt:latest
+docker run -d --name dd-chatgpt -v %cd%/config.yaml:/app/config.yaml cjz9032/dd-chatgpt:latest
 
 ```
 
