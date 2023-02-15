@@ -35,24 +35,11 @@
 
 [![Publish Docker image](https://github.com/cjz9032/dd-chatgpt/actions/workflows/publish-docker-hub.yml/badge.svg)](https://github.com/cjz9032/dd-chatgpt/actions/workflows/publish-docker-hub.yml)
 
-## 在Linux上通过Docker使用（✅ 推荐）
-
-```sh
-cp config.yaml.example config.yaml
-# 在当前目录创建并修改config.yaml
-# 在Linux或WindowsPowerShell上运行如下命令
-docker run -d --name dd-chatgpt -v $(pwd)/config.yaml:/app/config.yaml cjz9032/dd-chatgpt:latest
-
-```
-
-## 在Windows上通过Docker使用
+## Docker
 
 ```sh
 # 在当前目录创建并修改config.yaml
-# 在WindowsPowerShell中运行如下命令
-docker run -d --name dd-chatgpt -v $(pwd)/config.yaml:/app/config.yaml cjz9032/dd-chatgpt:latest
-# 在Windows command line (cmd)中, 您需要像这样修改上述代码的挂载目录:
-docker run -d --name dd-chatgpt -v %cd%/config.yaml:/app/config.yaml cjz9032/dd-chatgpt:latest
+docker run -d --name dd-chatgpt -v $(pwd)/config.json:/src/config.json -p 8081:8081 cjz9032/dd-chatgpt:latest
 
 ```
 
@@ -70,31 +57,33 @@ npm install
 将配置文件复制一份以配置您的项目
 
 ```sh
-cp config.yaml.example config.yaml
+cp ./src/config.json.example ./src/config.json
 ```
 
 ### 获取 OpenAI 的账户并配置到项目中
 
 > 如果你没有 OpenAI 的账号，并且您在无法访问 OpenAI 的国家或地区，你可以查看[here](https://mirror.xyz/boxchen.eth/9O9CSqyKDj4BKUIil7NC1Sa1LJM-3hsPqaeW_QjfFBc).
 
-#### 配置方法 A：使用账号密码
+#### 配置方法
+格式如下
 
-可以在配置文件中输入你的账号密码，格式如下
+```json
+{
+  "chatGPTAccountPool": [
+    {
+      "apiKey": "oooooooh"
+    }
+  ],
+  "openAIProxy": ""
+}
 
-```yaml
-chatGPTAccountPool:
-  - apiKey: <apiKey>
 ```
 
 ⚠️ 触发关键字必须出现在接收到的消息的第一个位置⚠️
 
 请确保您的终端网络可以登陆 OpenAI。如果登陆失败，请尝试使用代理或使用 SessionToken 方法配置
 
-**设置代理:**
-编辑配置文件 `config.yaml`
-```yaml
-openAIProxy: <代理地址>
-```
+
 ### 启动项目
 
 ```sh

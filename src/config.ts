@@ -1,29 +1,17 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 dotenv.config();
-import { parse } from "yaml";
-import fs from "fs";
-import path from "path";
-import { IConfig, IAccount } from "./interface";
-import { fileURLToPath } from 'url'
+import fs from 'fs';
+import { IConfig, IAccount } from './interface';
+import configFile from './config.json';
 
-const __filenameNew = fileURLToPath(import.meta.url)
-
-const __dirnameNew = path.dirname(__filenameNew)
-// If config file exist read config file. else read config from environment variables.
-let configFile: any = {};
-
-if (fs.existsSync(path.join(__dirnameNew, "../config.yaml"))) {
-  const file = fs.readFileSync(path.join(__dirnameNew, "../config.yaml"), "utf8");
-  configFile = parse(file);
-}
-
+const configParsed = configFile as any;
 dotenv.config();
 
 export const config: IConfig = {
-  chatGPTAccountPool: configFile.chatGPTAccountPool as Array<IAccount>,
-  chatGptRetryTimes: configFile.chatGptRetryTimes || 3,
+  chatGPTAccountPool: configParsed.chatGPTAccountPool as Array<IAccount>,
+  chatGptRetryTimes: configParsed.chatGptRetryTimes || 3,
   // Support openai-js use this proxy
-  openAIProxy: configFile.openAIProxy,
-  clearanceToken: configFile.clearanceToken,
-  userAgent: configFile.userAgent,
+  openAIProxy: configParsed.openAIProxy,
+  clearanceToken: configParsed.clearanceToken,
+  userAgent: configParsed.userAgent,
 };

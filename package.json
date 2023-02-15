@@ -6,7 +6,7 @@
   "export": "dist/main.js",
   "scripts": {
     "serve": "pm2 start ./dist/main.js --name dd",
-    "dev": "nodemon --exec node --watch config.yaml --loader ts-node/esm src/main.ts",
+    "dev": "nodemon --exec node --experimental-json-modules --loader ts-node/esm src/main.ts ",
     "pm2": "pm2",
     "build": "tsc"
   },
