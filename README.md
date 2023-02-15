@@ -16,13 +16,11 @@
 > [English](README.md) | 中文文档
 
 ### 2022.12.27 更新
-目前, 使用 Docker 或 Railway 部署, 会出现意料之外的问题, 我们正在努力解决。
+目前, 使用 Docker 会出现意料之外的问题, 我们正在努力解决。
 
 ### 2022.12.20 更新
 
 感谢 @transitive-bullshit 的工作, 使得ChatGPT API可以自动完成这项工作。
-现在可以使用密码的用户名来登录, 并配置打码 [CAPTCHAs](#CAPTCHAS) 来使得整个流程全自动化.
-
 
 ## 🌟 功能点
 
@@ -34,6 +32,8 @@
 - [x] 发布到 Docker.hub
 - [x] 实现 OpenAI 账户池的热加载
 - [X] 当 OpenAI 返回码为 429/503 时自动重试
+
+[![Publish Docker image](https://github.com/cjz9032/dd-chatgpt/actions/workflows/publish-docker-hub.yml/badge.svg)](https://github.com/cjz9032/dd-chatgpt/actions/workflows/publish-docker-hub.yml)
 
 ## 在Linux上通过Docker使用（✅ 推荐）
 
