@@ -1,6 +1,5 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
-import fs from 'fs';
 import { IConfig, IAccount } from './interface';
 import configFile from './config.json';
 
