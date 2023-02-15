@@ -68,12 +68,6 @@ export class ChatGPTPool {
         ...account,
       });
       try {
-        // await AsyncRetry(
-        //   async () => {
-        //     await chatGpt.initSession();
-        //   },
-        //   { retries: 3 }
-        // );
         chatGPTPools.push({
           chatGpt: chatGpt,
           account: account,
@@ -84,19 +78,6 @@ export class ChatGPTPool {
         );
       }
     }
-    // this.chatGPTPools = await Promise.all(
-    //   config.chatGPTAccountPool.map(async (account) => {
-    //     const chatGpt = new ChatGPTAPIBrowser({
-    //       ...account,
-    //       proxyServer: config.openAIProxy,
-    //     });
-    //     await chatGpt.initSession();
-    //     return {
-    //       chatGpt: chatGpt,
-    //       account: account,
-    //     };
-    //   })
-    // );
     this.chatGPTPools = chatGPTPools;
     if (this.chatGPTPools.length === 0) {
       throw new Error('⚠️ No chatgpt account in pool');
@@ -197,6 +178,8 @@ export class ChatGPTPool {
         return ErrorCode2Message[code];
       }
     }
+    console.log(err);
+    
     return ErrorCode2Message.unknown;
   }
 }

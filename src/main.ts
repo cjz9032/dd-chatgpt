@@ -1,48 +1,27 @@
-import { WechatyBuilder } from "wechaty";
-import QRCode from "qrcode";
-import { ChatGPTBot } from "./bot.js";
-const chatGPTBot = new ChatGPTBot();
-
-const bot =  WechatyBuilder.build({
-  name: "wechat-assistant", // generate xxxx.memory-card.json and save login data for the next login
-  puppetOptions: {
-    uos: true, // 开启uos协议
-  },
-  puppet: "wechaty-puppet-wechat",
-});
-// get a Wechaty instance
+import fetch from 'node-fetch';
+import { startServer } from './dd-server/app.js';
+(globalThis as any).fetch = fetch;
 
 async function main() {
+  const { ChatGPTBot } = await import('./bot.js');
+  const chatGPTBot = new ChatGPTBot();
+
   await chatGPTBot.startGPTBot();
-  bot
-    .on("scan", async (qrcode, status) => {
-      const url = `https://wechaty.js.org/qrcode/${encodeURIComponent(qrcode)}`;
-      console.log(`Scan QR Code to login: ${status}\n${url}`);
-      console.log(
-        await QRCode.toString(qrcode, { type: "terminal", small: true })
-      );
-    })
-    .on("login", async (user) => {
-      console.log(`User ${user} logged in`);
-      chatGPTBot.setBotName(user.name());
-    })
-    .on("message", async (message) => {
+
+  try {
+    startServer(async (msg) => {
+      console.debug('dd-server callback', msg);
       if (!chatGPTBot.ready) {
         return;
       }
-      if (message.text().startsWith("/ping")) {
-        await message.say("pong");
-        return;
-      }
       try {
-        console.log(`Message: ${message}`);
-        await chatGPTBot.onMessage(message);
+        console.log(`Message: ${msg}`);
+        await chatGPTBot.onMessage(msg);
       } catch (e) {
         console.error(e);
       }
     });
-  try {
-    await bot.start();
+    // await bot.start();
   } catch (e) {
     console.error(
       `⚠️ Bot start failed, can you log in through wechat on the web?: ${e}`
