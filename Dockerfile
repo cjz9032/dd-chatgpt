@@ -5,8 +5,8 @@ RUN apt-get install -y wget \
     && rm -rf /var/lib/apt/lists/* \
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci > a &&\
-    npm run build > b &&
+RUN npm ci 
 COPY . .
+RUN npm run build
 
 CMD npm run serve
