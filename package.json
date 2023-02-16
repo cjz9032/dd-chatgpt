@@ -5,7 +5,7 @@
   "main": "dist/main.js",
   "export": "dist/main.js",
   "scripts": {
-    "serve": "npm run build && pm2 start ./pm2.json",
+    "serve": "npm run build && pm2 start ./pm2.json && pm2 logs",
     "dev": "nodemon --exec node --experimental-json-modules --loader ts-node/esm src/main.ts ",
     "pm2": "pm2",
     "build": "tsc"
