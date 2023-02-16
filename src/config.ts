@@ -1,16 +1,30 @@
 import * as dotenv from 'dotenv';
-dotenv.config();
 import { IConfig, IAccount } from './interface';
-import configFile from './config.json';
+import fs from 'fs';
+import process from 'process';
+import path from 'path';
 
-const configParsed = configFile as any;
 dotenv.config();
+
+let configFile;
+const cfgFile = path.join(process.cwd(), './config.json');
+
+if (fs.existsSync(cfgFile)) {
+  const file = fs.readFileSync(cfgFile, 'utf8');
+  configFile = JSON.parse(file);
+} else {
+  configFile = {
+    chatGPTAccountPool: [
+      {
+        apiKey: process.env.OPENAI_API_KEY,
+      },
+    ],
+  };
+}
 
 export const config: IConfig = {
-  chatGPTAccountPool: configParsed.chatGPTAccountPool as Array<IAccount>,
-  chatGptRetryTimes: configParsed.chatGptRetryTimes || 3,
+  chatGPTAccountPool: configFile.chatGPTAccountPool as Array<IAccount>,
+  chatGptRetryTimes: configFile.chatGptRetryTimes || 3,
   // Support openai-js use this proxy
-  openAIProxy: configParsed.openAIProxy,
-  clearanceToken: configParsed.clearanceToken,
-  userAgent: configParsed.userAgent,
+  openAIProxy: configFile.openAIProxy,
 };

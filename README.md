@@ -38,8 +38,9 @@
 ## Docker
 
 ```sh
-# 在当前目录创建并修改config.yaml
-docker run -d --name dd-chatgpt -v $(pwd)/config.json:/src/config.json -p 8081:8081 cjz9032/dd-chatgpt:latest
+# 在当前目录创建并修改config.json
+
+docker run  -d --name dd-chatgpt --env OPENAI_API_KEY="123456" -p 8081:8081   cjz9032/dd-chatgpt:latest
 
 ```
 
@@ -57,7 +58,7 @@ npm install
 将配置文件复制一份以配置您的项目
 
 ```sh
-cp ./src/config.json.example ./src/config.json
+cp ./config.json.example ./config.json
 ```
 
 ### 获取 OpenAI 的账户并配置到项目中

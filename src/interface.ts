@@ -21,6 +21,4 @@ export interface IConfig {
   chatGPTAccountPool: IAccount[];
   chatGptRetryTimes: number;
   openAIProxy?: string;
-  clearanceToken: string;
-  userAgent: string;
 }

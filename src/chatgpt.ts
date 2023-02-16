@@ -1,7 +1,5 @@
 import { ChatGPTAPI } from 'chatgpt';
-
 import { config } from './config.js';
-import AsyncRetry from 'async-retry';
 import {
   IChatGPTItem,
   IConversationItem,
